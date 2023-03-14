@@ -4,7 +4,8 @@
   "info": {
     "singularName": "presupuesto",
     "pluralName": "presupuestos",
-    "displayName": "Presupuesto"
+    "displayName": "Presupuesto",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -17,20 +18,8 @@
       "target": "api::cliente.cliente",
       "inversedBy": "presupuestos"
     },
-    "item": {
-      "type": "string"
-    },
     "descripcion": {
       "type": "text"
-    },
-    "unidad": {
-      "type": "string"
-    },
-    "cantidad": {
-      "type": "integer"
-    },
-    "unitario": {
-      "type": "decimal"
     },
     "precio": {
       "type": "decimal"
@@ -40,6 +29,12 @@
     },
     "total": {
       "type": "decimal"
+    },
+    "presupuesto_items": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::presupuesto-item.presupuesto-item",
+      "mappedBy": "presupuesto"
     }
   }
 }

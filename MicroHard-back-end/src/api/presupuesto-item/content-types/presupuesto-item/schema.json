@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "presupuesto_items",
+  "info": {
+    "singularName": "presupuesto-item",
+    "pluralName": "presupuesto-items",
+    "displayName": "PresupuestoItem"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "presupuesto": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::presupuesto.presupuesto",
+      "inversedBy": "presupuesto_items"
+    },
+    "item": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::item.item"
+    },
+    "cantidad": {
+      "type": "integer",
+      "required": true
+    }
+  }
+}

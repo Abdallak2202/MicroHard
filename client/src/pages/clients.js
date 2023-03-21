@@ -1,5 +1,7 @@
 import React, {useState} from 'react'
 import Link from 'next/link'
+import pedirPresupuesto from '../../components/pedirPresupuesto/pedirPresupuesto';
+
 
 export default function ClientsCreate(){
     
@@ -44,6 +46,7 @@ export default function ClientsCreate(){
         body: JSON.stringify(input)
       });
       const data = await response.json();
+      
       console.log(data);
     } catch (error) {
       console.error(error);

@@ -10,8 +10,6 @@ export default function LandingPage() {
         </div>
         <div className=' pt-48 '>
           <Carrusel/>
-
-          
         </div>
     </div>
   )

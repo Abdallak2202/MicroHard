@@ -1,0 +1,8 @@
+{
+    "method": "POST",
+    "path": "/auth/local/magic/callback",
+    "handler": "magic.loginWithMagicLink",
+    "config": {
+      "policies": []
+    }
+  }

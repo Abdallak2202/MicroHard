@@ -4,21 +4,26 @@ import Link from 'next/link'
 export default function ClientsCreate(){
     
     const [input, setInput] = useState({
+        data:{
         nombre:"",
         CUIT:"",
         email:"",
         direccion:"",
         contacto:"",
-        telefono:"",
-        createtAt:""
-     })
+        telefono:""
+        }
+       })
 
-     function handleChange(e){
-      setInput({
+       function handleChange(e) {
+        setInput({
           ...input,
-          [e.target.name] : e.target.value
-      })
-    }
+          data: {
+            ...input.data,
+            [e.target.name]: e.target.value
+          }
+        });
+      }
+      
 
     const handleSubmit = async (event) => {
       event.preventDefault();
@@ -26,14 +31,15 @@ export default function ClientsCreate(){
      // dispatch(postActivity(input))
       alert("Cliente Creado!!")
       setInput({
-        nombre:"",
-        CUIT:"",
-        email:"",
-        direccion:"",
-        contacto:"",
-        telefono:"",
-        createtAt:""
-     })
+        data:{
+          nombre:"",
+          CUIT:"",
+          email:"",
+          direccion:"",
+          contacto:"",
+          telefono:""
+          }
+       })
 
      try {
       const response = await fetch('http://localhost:1337/api/clientes/', {
@@ -143,7 +149,7 @@ export default function ClientsCreate(){
                     
                 </div>
 
-                <div className='mb-3'>
+                {/* <div className='mb-3'>
                   <label className='mb-3 block text-base font-medium text-gray-200'>Creation Date:</label>
                   <input 
                   class="w-full rounded-md border  border-[#fcfcfc] bg-transparent py-3 px-6 text-base font-medium text-[#ffffff] outline-none focus:border-[#6A64F1] focus:shadow-md"
@@ -153,7 +159,7 @@ export default function ClientsCreate(){
                  onChange={(e)=> handleChange(e)}
                    />
                     
-                </div>
+                </div> */}
                 <br />
       <div className="text-4xl bg-blue-900 hover:bg-blue-700 text-white font-bold py-2 px-4  rounded-full focus:outline-none focus:shadow-outline"
 type="submit" >

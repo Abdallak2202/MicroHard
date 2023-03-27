@@ -21,7 +21,7 @@ export default function ProjectsCreate(){
     const handleSubmit = async (event) => {
         event.preventDefault();
       console.log(input)
-      dispatch(postActivity(input))
+     // dispatch(postActivity(input))
       alert("Project created!!!")
       setInput({
         creationDate:"",

@@ -108,7 +108,7 @@ export default function NavBar() {
 
         <div className='pl-8 '>
 
-        <Link href="/document" >
+        <Link href="/projects" >
             <button class="border-b-2 border-transparent hover:text-gray-200  hover:border-blue-500 ">
                 Proyectos
             </button>

@@ -25,7 +25,7 @@ export default function BudgetsCreate() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log(input);
-    dispatch(postActivity(input));
+    //dispatch(postActivity(input));
     alert('Budget created!!!');
     setInput({
       creationDate: '',

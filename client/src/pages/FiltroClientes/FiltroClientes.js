@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import SearchBar from '/components/searchBar/searchBar';
 import Table from '../../../components/clientes/filtroClientes';
 
+
 function MyPage() {
     const [data, setData] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
@@ -20,6 +21,7 @@ function MyPage() {
       <div>
         <SearchBar onSearch={handleSearch} />
         <Table data={data} searchTerm={searchTerm} />
+       
       </div>
     );
   }

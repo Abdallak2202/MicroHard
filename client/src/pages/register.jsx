@@ -1,7 +1,8 @@
 import React from 'react'
+import Register from '../../components/register/register'
 
-export default function Register() {
+export default function Registers() {
   return (
-    <div>register</div>
+    <Register />
   )
 }

@@ -4,31 +4,33 @@ import Link from 'next/link'
 export default function ProjectsCreate(){
     
     const [input, setInput] = useState({
-        creationDate:"",
-        description:"",
-        usedMaterials:"",
-        hoursMen:"",
-        note:""
+      data:{
+        descripcion:"",
+        material:"",
+        horas:""
+           }
      })
 
-     function handleChange(e){
+     function handleChange(e) {
       setInput({
-          ...input,
-          [e.target.name] : e.target.value
-      })
+        ...input,
+        data: {
+          ...input.data,
+          [e.target.name]: e.target.value
+        }
+      });
     }
 
     const handleSubmit = async (event) => {
         event.preventDefault();
       console.log(input)
-      dispatch(postActivity(input))
       alert("Project created!!!")
       setInput({
-        creationDate:"",
-        description:"",
-        usedMaterials:"",
-        hoursMen:"",
-        note:""
+        data:{
+          descripcion:"",
+          material:"",
+          horas:""
+             }
      })
 
      try {
@@ -80,36 +82,36 @@ export default function ProjectsCreate(){
 
               
               <div className='mb-3'>
-                     <label className='mb-3 block text-base font-medium  text-gray-200'>Description:</label>
+                     <label className='mb-3 block text-base font-medium  text-gray-200'>Descripcion:</label>
                    <input 
                    class="w-full rounded-md border border-[#fcfcfc] bg-transparent py-3 px-6 text-base font-medium text-[#ffffff] outline-none focus:border-[#6A64F1] focus:shadow-md"
                     type="text" 
-                     value= {input.description}
-                     name= "description"
+                     value= {input.descripcion}
+                     name= "descripcion"
                  onChange={(e)=> handleChange(e)}
                     />
                     
                 </div>
 
                 <div className='mb-3'>
-                     <label className='mb-3 block text-base font-medium text-gray-200' >Used Materials:</label>
+                     <label className='mb-3 block text-base font-medium text-gray-200' >Materiales Utilizados:</label>
                    <input 
                    class="w-full rounded-md border  border-[#fcfcfc] bg-transparent py-3 px-6 text-base font-medium text-[#ffffff] outline-none focus:border-[#6A64F1] focus:shadow-md"
                     type="text" 
-                     value= {input.usedMaterials}
-                     name= "usedMaterials"
+                     value= {input.materiales}
+                     name= "materiales"
                  onChange={(e)=> handleChange(e)}
                     />
                     
                 </div>
 
                <div className='mb-3'>
-                     <label className='mb-3 block text-base font-medium text-gray-200'>Hours Men:</label>
+                     <label className='mb-3 block text-base font-medium text-gray-200'>Horas de laboradas:</label>
                    <input 
                    class="w-full rounded-md border  border-[#fcfcfc] bg-transparent py-3 px-6 text-base font-medium text-[#ffffff] outline-none focus:border-[#6A64F1] focus:shadow-md"
                     type="num" 
-                     value= {input.hoursMen}
-                     name= "hoursMen"
+                     value= {input.horas}
+                     name= "horas"
                  onChange={(e)=> handleChange(e)}
                     />
                     
@@ -129,7 +131,7 @@ export default function ProjectsCreate(){
         <div className=' pt-3 pb-3'>   
       <div className="text-4xl bg-blue-900 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline "
         type="submit" >
-      <button type="submit">Upload Project</button>
+      <button type="submit">Upload Proyecto</button>
       </div>
       </div> 
     </form>
@@ -149,6 +151,6 @@ export default function ProjectsCreate(){
     </div>
 
     </div>
-    
-  )
+    
+  )
 }

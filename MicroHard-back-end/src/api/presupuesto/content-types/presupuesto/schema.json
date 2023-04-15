@@ -24,7 +24,7 @@
     "precio": {
       "type": "decimal"
     },
-    "IVA": {
+    "iva": {
       "type": "decimal"
     },
     "total": {
@@ -35,6 +35,10 @@
       "relation": "oneToMany",
       "target": "api::presupuesto-item.presupuesto-item",
       "mappedBy": "presupuesto"
+    },
+    "tipo": {
+      "type": "string",
+      "default": "Presupuesto"
     }
   }
 }

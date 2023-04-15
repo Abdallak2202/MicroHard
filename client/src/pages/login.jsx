@@ -59,8 +59,7 @@ export default function Login() {
        <a
          href="http://localhost:3000/register"
         class="font-medium text-zinc-300 underline-offset-4 hover:text-zinc-400 "
-         >  Creala!</a
-      >
+         >  Creala!</a>
      </p>
 
           <button 
@@ -73,7 +72,7 @@ export default function Login() {
   
 }
 
-
+{/* 
 // <!-- page -->
 // <main
 //   class="mx-auto flex min-h-screen w-full items-center justify-center bg-gray-900 text-white"
@@ -117,4 +116,4 @@ export default function Login() {
 //       >
 //     </p>
 //   </section>
-// </main>
+// </main> */}

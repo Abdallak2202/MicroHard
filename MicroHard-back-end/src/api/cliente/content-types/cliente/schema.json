@@ -49,6 +49,18 @@
       "relation": "oneToMany",
       "target": "api::proyecto.proyecto",
       "mappedBy": "cliente"
+    },
+    "recurrentes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::recurrente.recurrente",
+      "mappedBy": "cliente"
+    },
+    "cuenta": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::cuenta.cuenta",
+      "mappedBy": "cliente"
     }
   }
 }

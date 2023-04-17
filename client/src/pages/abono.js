@@ -24,7 +24,7 @@ export default function AbonoCreate() {
       console.log(clientsData)
       setClients(clientsData);
 
-      const cuentaResponse = await fetch('http://localhost:1337/api/cuenta');
+      const cuentaResponse = await fetch('http://localhost:1337/api/cuentas?populate=cliente');
       const cuentaJson = await cuentaResponse.json();
       setCuenta(cuentaJson.data);
     }
@@ -65,19 +65,21 @@ export default function AbonoCreate() {
       const abono = await response.json();
       console.log(abono);
 
-      const newDeuda = cuenta.deuda + parseFloat(input.data.monto);
-      const cuentaUpdateResponse = await fetch("http://localhost:1337/api/cuentas", {
-        method: "PUT",
+      const cuentaCreateResponse = await fetch("http://localhost:1337/api/cuentas", {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
           data: {
-            deuda: newDeuda.toFixed(2)
-          }
+            cliente: input.data.cliente,
+            monto: input.data.monto,
+            tipo: input.data.tipo,
+          },
         }),
       });
-      if (!cuentaUpdateResponse.ok) {
+      
+      if (!cuentaCreateResponse.ok) {
         alert("No se pudo actualizar la cuenta");
         throw new Error("Network response was not ok");
       }

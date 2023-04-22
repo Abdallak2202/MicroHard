@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 
@@ -20,14 +21,17 @@ export default function ServicioRecurrenteCreate() {
   useEffect(() => {
     async function fetchData() {
       const clientsResponse = await fetch("http://localhost:1337/api/clientes");
+
       const clientsJson = await clientsResponse.json();
       const clientsData = clientsJson.data;
       console.log(clientsData);
       setClients(clientsData);
 
+
       const cuentaResponse = await fetch("http://localhost:1337/api/cuenta");
       const cuentaJson = await cuentaResponse.json();
       setCuenta(cuentaJson.data);
+
     }
     fetchData();
   }, []);
@@ -42,11 +46,13 @@ export default function ServicioRecurrenteCreate() {
     });
   }
 
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (input.data.renovable === "true") {
       try {
+
         const servicioResponse = await fetch('http://localhost:1337/api/recurrentes/', {
           method: 'POST',
           headers: {
@@ -55,6 +61,7 @@ export default function ServicioRecurrenteCreate() {
           body: JSON.stringify(input)
         });
     
+
         const cuentaResponse = await fetch("http://localhost:1337/api/cuentas/", {
           method: "POST",
           headers: {
@@ -67,6 +74,7 @@ export default function ServicioRecurrenteCreate() {
           alert("No se pudieron crear los recursos");
           throw new Error("Network response was not ok");
         }
+
     
         alert("Recursos creados satisfactoriamente");
         console.log(await servicioResponse.json(), await cuentaResponse.json());
@@ -75,6 +83,7 @@ export default function ServicioRecurrenteCreate() {
         console.error(error);
       }
     }
+
     
   };
 
@@ -82,6 +91,7 @@ export default function ServicioRecurrenteCreate() {
     // validate input
     return true;
   }
+
     
   return (
     <div>

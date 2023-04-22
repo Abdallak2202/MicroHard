@@ -1,76 +1,76 @@
-import React, { useState, useEffect } from 'react';
+// import React, { useState, useEffect } from 'react';
 
 
-export default function Login() {
+// export default function Login() {
 
   
-    const [identifier, setIdentifier] = useState('');
-    const [password, setPassword] = useState('');
+//     const [identifier, setIdentifier] = useState('');
+//     const [password, setPassword] = useState('');
   
-    const handleUsernameChange = (event) => {
-      setIdentifier(event.target.value);
-    };
+//     const handleUsernameChange = (event) => {
+//       setIdentifier(event.target.value);
+//     };
   
-    const handlePasswordChange = (event) => {
-      setPassword(event.target.value);
-    };
+//     const handlePasswordChange = (event) => {
+//       setPassword(event.target.value);
+//     };
   
 
-    const handleSubmit = async (event) => {
-      event.preventDefault();
-      try {
-        const response = await fetch('http://localhost:1337/api/auth/local', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ identifier, password }),
-        });
-        const data = await response.json();
-        console.log(data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+//     const handleSubmit = async (event) => {
+//       event.preventDefault();
+//       try {
+//         const response = await fetch('http://localhost:1337/api/auth/local', {
+//           method: 'POST',
+//           headers: { 'Content-Type': 'application/json' },
+//           body: JSON.stringify({ identifier, password }),
+//         });
+//         const data = await response.json();
+//         console.log(data);
+//       } catch (error) {
+//         console.error(error);
+//       }
+//     };
 
 
 
-    return (
-      <div className='mx-auto flex min-h-screen w-full items-center justify-center bg-zinc-800 text-white'>
+//     return (
+//       <div className='mx-auto flex min-h-screen w-full items-center justify-center bg-zinc-800 text-white'>
 
-      <section class="flex w-[30rem] flex-col space-y-10">
-        <h2 class="text-center text-4xl font-medium">Iniciar sesión</h2>
-        <form onSubmit={handleSubmit}>
-          <div  class="w-full transform border-b-2 bg-transparent text-lg duration-300 focus-within:border-black">
-          <label htmlFor="username">Usuario:</label>
-          <input  class="w-full border-none bg-transparent outline-none placeholder:italic focus:outline-none"
-           type="text" id="username" name="username" value={identifier} onChange={handleUsernameChange} />
-          </div>
+//       <section class="flex w-[30rem] flex-col space-y-10">
+//         <h2 class="text-center text-4xl font-medium">Iniciar sesión</h2>
+//         <form onSubmit={handleSubmit}>
+//           <div  class="w-full transform border-b-2 bg-transparent text-lg duration-300 focus-within:border-black">
+//           <label htmlFor="username">Usuario:</label>
+//           <input  class="w-full border-none bg-transparent outline-none placeholder:italic focus:outline-none"
+//            type="text" id="username" name="username" value={identifier} onChange={handleUsernameChange} />
+//           </div>
 
-          <div  class="w-full transform border-b-2 bg-transparent text-lg duration-300 focus-within:border-black">
-          <label htmlFor="password">Contraseña:</label>
-          <input 
-           class="w-full border-none bg-transparent outline-none placeholder:italic focus:outline-none"
-          type="password" id="password" name="password" value={password} onChange={handlePasswordChange} />
-          </div>
+//           <div  class="w-full transform border-b-2 bg-transparent text-lg duration-300 focus-within:border-black">
+//           <label htmlFor="password">Contraseña:</label>
+//           <input 
+//            class="w-full border-none bg-transparent outline-none placeholder:italic focus:outline-none"
+//           type="password" id="password" name="password" value={password} onChange={handlePasswordChange} />
+//           </div>
 
 
-           <p class="text-center text-lg">
-            <br />
-       No tenes una cuenta?
-       <a
-         href="http://localhost:3000/register"
-        class="font-medium text-zinc-300 underline-offset-4 hover:text-zinc-400 "
-         >  Creala!</a>
-     </p>
+//            <p class="text-center text-lg">
+//             <br />
+//        No tenes una cuenta?
+//        <a
+//          href="http://localhost:3000/register"
+//         class="font-medium text-zinc-300 underline-offset-4 hover:text-zinc-400 "
+//          >  Creala!</a>
+//      </p>
 
-          <button 
-          class="transform rounded-sm bg-zinc-600 py-2 font-bold duration-300 p-2  hover:bg-zinc-700"
-           type="submit">Iniciar sesión</button>
-        </form>
-        </section>
-      </div>
-    );
+//           <button 
+//           class="transform rounded-sm bg-zinc-600 py-2 font-bold duration-300 p-2  hover:bg-zinc-700"
+//            type="submit">Iniciar sesión</button>
+//         </form>
+//         </section>
+//       </div>
+//     );
   
-}
+// }
 
 {/* 
 // <!-- page -->
@@ -121,26 +121,80 @@ export default function Login() {
 
 
 
-// import React from 'react';
-// import auth0Client from '../../lib/auth0';
+import React from 'react';
+import auth0Client from '../../lib/auth0';
 
-// class Login extends React.Component {
-//   componentDidMount() {
-//     // If the user is already authenticated, redirect to the home page
-//     if (auth0Client.isAuthenticated()) {
-//       window.location.href = '/';
-//     }
-//   }
+class Login extends React.Component {
+  componentDidMount() {
+    // If the user is already authenticated, redirect to the home page
+    if (auth0Client.isAuthenticated()) {
+      window.location.href = '/';
+    }
+  }
 
-//   render() {
-//     return (
-//       <div>
-//         <h1>Login</h1>
-//         <p>Please log in to continue:</p>
-//         <button onClick={auth0Client.login}>Log In</button>
+  render() {
+    return (
+
+      //       <div className='mx-auto flex min-h-screen w-full items-center justify-center bg-zinc-800 text-white'>
+
+//       <section class="flex w-[30rem] flex-col space-y-10">
+//         <h2 class="text-center text-4xl font-medium">Iniciar sesión</h2>
+//         <form onSubmit={handleSubmit}>
+//           <div  class="w-full transform border-b-2 bg-transparent text-lg duration-300 focus-within:border-black">
+//           <label htmlFor="username">Usuario:</label>
+//           <input  class="w-full border-none bg-transparent outline-none placeholder:italic focus:outline-none"
+//            type="text" id="username" name="username" value={identifier} onChange={handleUsernameChange} />
+//           </div>
+
+//           <div  class="w-full transform border-b-2 bg-transparent text-lg duration-300 focus-within:border-black">
+//           <label htmlFor="password">Contraseña:</label>
+//           <input 
+//            class="w-full border-none bg-transparent outline-none placeholder:italic focus:outline-none"
+//           type="password" id="password" name="password" value={password} onChange={handlePasswordChange} />
+//           </div>
+
+
+//            <p class="text-center text-lg">
+//             <br />
+//        No tenes una cuenta?
+//        <a
+//          href="http://localhost:3000/register"
+//         class="font-medium text-zinc-300 underline-offset-4 hover:text-zinc-400 "
+//          >  Creala!</a>
+//      </p>
+
+//           <button 
+//           class="transform rounded-sm bg-zinc-600 py-2 font-bold duration-300 p-2  hover:bg-zinc-700"
+//            type="submit">Iniciar sesión</button>
+//         </form>
+//         </section>
 //       </div>
-//     );
-//   }
-// }
 
-// export default Login;
+<div className='mx-auto flex min-h-screen w-full items-center justify-center bg-zinc-800 text-white'>
+      <section class="flex w-[30rem] flex-col space-y-10 bg-zinc-600 border border-zinc-900 p-10 rounded-xl">
+      <h2 class="text-center text-4xl font-medium">Iniciar sesión</h2>
+
+        <p class="text-center text-lg">Please log in to continue:</p>
+        <button class="transform rounded-sm bg-zinc-600 py-2 font-bold duration-300 p-2  hover:bg-zinc-700" onClick={auth0Client.login}>Log In</button>
+        
+      
+
+
+
+
+
+        <p class="text-center text-lg">
+            <br />
+       No tenes una cuenta?
+       <a
+         href="http://localhost:3000/register"
+        class="font-medium text-zinc-300 underline-offset-4 hover:text-zinc-400 "
+         >  Creala!</a>
+     </p> 
+     </section>
+     </div>
+    );
+  }
+}
+
+export default Login;

@@ -29,7 +29,22 @@ export default function AbonoCreate() {
   })
 
   const [clients, setClients] = useState([]);
-  const [cuenta, setCuenta] = useState(null);
+
+  useEffect(() => {
+    var {monto}= input.data;
+
+    if (monto) {
+      monto=monto.toString().replace("," , ".");
+    };
+
+    setInput((input) => ({
+      ...input,
+      data: {
+        ...input.data,
+        monto: monto
+      },
+    }));
+  }, [input.data.monto]);
 
   useEffect(() => {
     async function fetchData() {
@@ -38,10 +53,6 @@ export default function AbonoCreate() {
       const clientsData = clientsJson.data;
       console.log(clientsData)
       setClients(clientsData);
-
-      const cuentaResponse = await fetch('http://localhost:1337/api/cuenta');
-      const cuentaJson = await cuentaResponse.json();
-      setCuenta(cuentaJson.data);
     }
     fetchData();
   }, []);
@@ -65,6 +76,15 @@ export default function AbonoCreate() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setInput({
+      data:{
+        cliente: "",
+        monto: "",
+        fecha: "",
+        nota: "",
+        tipo: "Abono"
+      }
+    })
   
     const validationErrors = validate(input.data);
     setErrors(validationErrors);
@@ -106,10 +126,6 @@ export default function AbonoCreate() {
   };
   
 
-  function validateInput() {
-    // validate input
-    return true;
-  }
 
   return (
     <div>

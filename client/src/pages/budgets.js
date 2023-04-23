@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import Link from 'next/link'
+
 
 export default function BudgetsCreate(){
     
@@ -9,7 +9,7 @@ export default function BudgetsCreate(){
         descripcion:"",
         total:""
            }
-     })
+     });
 
     const [selectedItems, setSelectedItems]= useState({
        id:"",
@@ -132,7 +132,11 @@ export default function BudgetsCreate(){
         iva:"",
         cantidad:""
       })
-      document.getElementsByName("item")[0].value = document.getElementsByName("item")[0].options[0].value;
+      const itemInput = document.getElementsByName("item")[0];
+if (itemInput) {
+  itemInput.value = itemInput.options[0].value;
+}
+
     };
 
     function handleRemoveItem(id) {
@@ -159,18 +163,16 @@ export default function BudgetsCreate(){
       })
       setFinalItems([]);
 
-     try {
-        let body={
-          data:{
-            cliente: parseInt(input.data.cliente),
-            descripcion: input.data.descripcion,
-            total: input.data.total,
-            items: finalItems
-               }
-        }
-        console.log("BODY", body);
+      async function handleSaveBudget() {
+        const budgetData = {
+          cliente: parseInt(input.data.cliente),
+          descripcion: input.data.descripcion,
+          total: input.data.total,
+          items: finalItems
+        };
 
-        let account={
+     try {
+         let account={
           data:{
             cliente: parseInt(input.data.cliente),
             tipo: "Presupuesto",
@@ -184,7 +186,7 @@ export default function BudgetsCreate(){
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify(body)
+          body: JSON.stringify({ data: budgetData })
         });
 
         const accountResponse= await fetch('http://localhost:1337/api/cuentas/', {
@@ -205,12 +207,29 @@ export default function BudgetsCreate(){
         const accountData= await accountResponse.json();
         console.log(budgetData);
         console.log(accountData);
+
+        setInput({
+          data: {
+            cliente: "",
+            descripcion: "",
+            total: ""
+          }
+        });
+        setSelectedItems({
+          id: "",
+          item: "",
+          precio: "",
+          iva: "",
+          cantidad: ""
+        });
+        setFinalItems([]);
+
         
       } catch (error) {
         console.error(error);
       }
     };
-
+  }
     
 
 
@@ -299,11 +318,12 @@ export default function BudgetsCreate(){
                                  </thead>
          
                                  <tbody>
-                                     <tr>
-                                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-            
-                                                   
-                                             <label className='mb-3 block text-base font-medium  text-gray-200'></label>
+
+  {finalItems.map((item, index) => (
+  <tr key={index}>
+  <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+        
+                <label className='mb-3 block text-base font-medium  text-gray-200'></label>
                             <select 
                             className="w-full rounded-md border border-[#7b7777] bg-transparent py-3 px-8 text-base font-medium text-[#444343] outline-none focus:border-[#6A64F1] focus:shadow-md"
                              type="text" 
@@ -382,8 +402,13 @@ export default function BudgetsCreate(){
                     />
 
                         </td>
+                        <td>
+
+                    <button onClick={() => handleRemoveItem(index)}>Eliminar</button>
+</td>
          
                                      </tr>
+                                 ))}
                                  </tbody>
                              </table>
                              

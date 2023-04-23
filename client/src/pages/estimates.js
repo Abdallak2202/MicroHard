@@ -1,8 +1,10 @@
-import React, {useState, useEffect} from 'react'
-import Link from 'next/link'
+import React, { useState, useEffect } from 'react';
 
 export default function EstimateCreate(){
+
     
+    const [itemRows, setItemRows] = useState([{ item: "", descripcion: "", cantidad: "", horas: "" }]);
+
     const [input, setInput] = useState({
       data:{
         cliente:"",
@@ -53,6 +55,13 @@ export default function EstimateCreate(){
       });
     }
 
+    function handleItemRowChange(index, name, value) {
+      const rows = [...itemRows];
+      rows[index] = { ...rows[index], [name]: value };
+      setItemRows(rows);
+    }
+    
+
     function handleItemName(e) {
       var itemId = e.target.value;
       const selectedItem = items.find((item) => item.id == itemId);
@@ -85,6 +94,10 @@ export default function EstimateCreate(){
       setFinalItems(list);
     };
 
+    function handleAddRow() {
+      setItemRows(itemRows.concat({}));
+    }
+
     const handleSubmit = async (event) => {
       event.preventDefault();
       console.log(input)
@@ -103,22 +116,24 @@ export default function EstimateCreate(){
       setFinalItems([]);
 
      try {
-        let body={
-          data:{
-            cliente: parseInt(input.data.cliente),
-            descripcion: input.data.descripcion,
-            horas: input.data.horas,
-            items: finalItems
-               }
-        }
+        const body = {
+  data: {
+    cliente: parseInt(input.data.cliente),
+    descripcion: row.descripcion,
+    horas: row.horas,
+    items: row.item
+  }
+};
         console.log("BODY", body);
         const response = await fetch('http://localhost:1337/api/proyectos/', {
           method: 'POST',
           headers: {
+
             'Content-Type': 'application/json'
           },
           body: JSON.stringify(body)
         });
+        
         if (!response.ok) {
           alert("No se pudo crear la Estimación");
           throw new Error('Network response was not ok');
@@ -191,6 +206,9 @@ export default function EstimateCreate(){
 
                         <thead>
 
+
+
+
                             <tr>
                                 <th
                                     class="px-5 py-3 border-b-2 border-gray-200 bg-zinc-700 text-left text-xs font-semibold text-gray-50 uppercase tracking-wider">
@@ -210,51 +228,54 @@ export default function EstimateCreate(){
                                 </th>
                             </tr>
                         </thead>
-
                         <tbody>
-                            <tr>
-                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-   
-                                          
-                                    <label className='mb-3 block text-base font-medium  text-gray-200'></label>
-                   <select 
-                   className="w-full rounded-md border border-[#7b7777] bg-transparent py-3 px-6 text-base font-medium text-[#444343] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                    type="text" 
-                    name= "item"
-                    onChange={(e)=> handleItemName(e)}
-                    >
-                      <option value="">Selecciona un Item</option>
+                           
+
+      
+  {itemRows.map((row, index) => (
+  <tr key={index}>
+  <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+
+            
+      <label className='mb-3 block text-base font-medium  text-gray-200'></label>
+<select 
+className="w-full rounded-md border border-[#7b7777] bg-transparent py-3 px-6 text-base font-medium text-[#444343] outline-none focus:border-[#6A64F1] focus:shadow-md"
+type="text"
+        name="item"
+        value={row.item}
+        onChange={(e) => handleItemRowChange(index, "item", e.target.value)}
+      >
+                           
+                   <option value="">Selecciona un Item</option>
                       {items.map((item) => (
                         <option key={item.id} value={item.id}>
                         {item.attributes.nombre}
                         </option>
                       ))}
                   </select>    
-
-
                 </td>
+
                  <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                   <label className='mb-3 block text-base font-medium  text-gray-200'></label>
                    <input 
                    className="w-full rounded-md border border-[#7b7777] bg-transparent py-3 px-6 text-base font-medium text-[#444343] outline-none focus:border-[#6A64F1] focus:shadow-md"
                     type="text" 
-                     value= {input.data.descripcion}
+                     value= {row.descripcion}
                      name= "descripcion"
                      placeholder='Descripcion'
-                 onChange={(e)=> handleChange(e)}
+                 onChange={(e)=> handleItemRowChange(index, "descripcion", e.target.value)}
                     />
-                                </td>
+                </td>
 
 
                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm pb-2">
-                  
-                  <input
+                <input
                   id='amount'
                   className="w-full rounded-md border  border-[#7b7777] bg-transparent py-3 px-6 text-base font-medium text-[#444343] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                  value={selectedItems.cantidad}
+                  value={row.cantidad}
                   name='cantidad'
                   placeholder='Cantidad'
-                  onChange={(e)=> handleItem(e)}
+                  onChange={(e)=> handleItemRowChange(index, "cantidad", e.target.value)}
                   />
                  </td>
 
@@ -265,22 +286,30 @@ export default function EstimateCreate(){
                 <label className='mb-3 block text-base font-medium  text-gray-200'></label>
                    <input 
                    className="w-full rounded-md border border-[#7b7777] bg-transparent py-3 px-6 text-base font-medium text-[#444343] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                     value= {input.data.horas}
+                     value= {row.horas}
                      name= "horas"
                      placeholder='Horas Laborales'
-                     onChange={(e)=> handleChange(e)}
+                     onChange={(e)=> handleItemRowChange(index, "horas", e.target.value)}
                     />
                 </td>
 
+<td>
+
+                    <button onClick={() => handleRemoveItem(index)}>Eliminar</button>
+</td>
+                
                             </tr>
+  ))}
                         </tbody>
                     </table>
                     
-                    <div
-                        class="px-5 py-3 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between          ">
+                    <div class="px-5 py-3 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between">
 
                         <div class="inline-flex mt-2 xs:mt-0 space-x-5">
 
+                    
+                    
+                                    
                         <div className=" bg-blue-900 hover:bg-blue-700 text-white py-2 px-8 rounded-full focus:outline-none focus:shadow-outline "
                           type="submit" >
                           <button type="submit">Crear Estimación</button>
@@ -289,8 +318,8 @@ export default function EstimateCreate(){
                         <button
                         type='button'
                         className="text-gray-50  bg-blue-900  py-2 px-8 hover:bg-blue-700  rounded-full"
-                        onClick={(e)=> addItem(e)}> Agregar Fila </button>
-
+                        onClick={(e)=> handleAddRow(e)}> Agregar Fila </button>
+                  
                         </div>
                     </div>
                 </div>
@@ -299,7 +328,7 @@ export default function EstimateCreate(){
         </div>
     </div>
 </div>
-
+                        
     )
     }
 

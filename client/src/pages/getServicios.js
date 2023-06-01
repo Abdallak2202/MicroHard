@@ -9,6 +9,7 @@ const ServiceList = () => {
       .then(data => setServices(data.data));
   }, []);
 
+
   // Agrupar los servicios por cliente
   const groupedServices = services.reduce((acc, service) => {
     const cliente = service.attributes.cliente.data.attributes.nombre;
@@ -40,11 +41,14 @@ const ServiceList = () => {
           </ul>
         </div>
       ))}
+
     </div>
   );
 };
 
+
 export default ServiceList;
+
 
 
 

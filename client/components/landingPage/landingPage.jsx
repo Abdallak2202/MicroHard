@@ -2,7 +2,7 @@ import React from 'react'
 import Tarea from '../servicioMensual/servicioMensual'
 
 export default function LandingPage() {
-<tarea/>
+{/* <tarea/> */}
   return (
 
     <div className='flex flex-col top-0'> 

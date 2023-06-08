@@ -126,7 +126,6 @@ export default function NavBar() {
             </Link>
 
 
-        
         <div className="hidden md:block w-full md:w-auto" id="menu">
           
         <ul className="flex-col md:flex-row flex md:space-x-10 mt-4 md:mt-0 md:text-sm md:font-medium">

@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "cuentas",
+  "info": {
+    "singularName": "cuenta",
+    "pluralName": "cuentas",
+    "displayName": "Cuenta",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "tipo": {
+      "type": "enumeration",
+      "enum": [
+        "Presupuesto",
+        "Recurrente",
+        "Abono"
+      ]
+    },
+    "monto": {
+      "type": "decimal"
+    },
+    "deuda": {
+      "type": "decimal"
+    },
+    "cliente": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::cliente.cliente",
+      "inversedBy": "cuentas"
+    }
+  }
+}

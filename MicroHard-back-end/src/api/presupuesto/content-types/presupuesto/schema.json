@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "presupuestos",
+  "info": {
+    "singularName": "presupuesto",
+    "pluralName": "presupuestos",
+    "displayName": "Presupuesto",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "cliente": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::cliente.cliente",
+      "inversedBy": "presupuestos"
+    },
+    "descripcion": {
+      "type": "text"
+    },
+    "total": {
+      "type": "decimal",
+      "required": true
+    },
+    "tipo": {
+      "type": "string",
+      "default": "Presupuesto"
+    },
+    "items": {
+      "type": "json"
+    }
+  }
+}

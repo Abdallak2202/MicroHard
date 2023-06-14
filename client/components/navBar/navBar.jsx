@@ -110,7 +110,7 @@ export default function NavBar() {
     };
   }, []);
 
-
+/*prueba*/
   
 
   return (
